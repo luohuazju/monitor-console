@@ -3,116 +3,155 @@
  */
 
 import React, { PropTypes } from 'react';
-import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import toastr from 'toastr';
+import * as courseAction from '../../action/CourseAction';
+import CourseList from './CourseList';
 
 
 
-const getCaret = direction => {
-    if (direction === 'asc') {
-        return (
-            <span> <i className="fa fa-sort-asc" aria-hidden="true"/></span>
-        );
+export class CourseListContainer extends React.Component {
+
+    constructor() {
+        super();
+
+        this.state = {selectedCourseId: undefined};
+
+        this.handleAddCourse = this.handleAddCourse.bind(this);
+        this.handleEditCourse = this.handleEditCourse.bind(this);
+        this.handleDelete = this.handleDelete.bind(this);
+        this.handleRowSelect = this.handleRowSelect.bind(this);
     }
 
-    if (direction === 'desc') {
-        return (
-            <span> <i className="fa fa-sort-desc" aria-hidden="true"/></span>
-        );
+
+    componentDidMount() {
+        this.props.action.getCoursesAction()
+            .catch(error => {
+                toastr.error(error);
+            });
     }
 
-    return (
-        <span> <i className="fa fa-sort" aria-hidden="true" /></span>
-    );
-};
+
+
+    handleAddCourse() {
+        this.props.history.push('/course');
+    }
 
 
 
-const titleFormatter = (cell, row) => {
-    return `<a href=${row.watchHref} target="_blank">${cell}</a>`;
-};
+    handleEditCourse() {
+        const selectedCourseId = this.state.selectedCourseId;
+
+        if (selectedCourseId) {
+            this.setState({selectedCourseId: undefined});
+            this.props.history.push(`/course/${selectedCourseId}`);
+        }
+    }
 
 
 
-class CourseList extends React.Component {
+    handleDelete() {
+        const selectedCourseId = this.state.selectedCourseId;
 
-    constructor(props) {
-        super(props);
+        if (selectedCourseId) {
+            this.setState({selectedCourseId: undefined});
+            this.props.action.deleteCourseAction(selectedCourseId)
+                .catch(error => {
+                    toastr.error(error);
+                });
+        }
+    }
 
-        this.options = {
-            sortIndicator: true,
-            noDataText: 'No data'
-        };
 
-        this.selectRowProp = {
-            mode: 'radio',
-            bgColor: '#c1f291',
-            onSelect: props.handleRowSelect,
-            clickToSelect: true,
-            hideSelectColumn: true
-        };
+
+    handleRowSelect(row, isSelected) {
+        if (isSelected) {
+            this.setState({selectedCourseId: row.id});
+        }
     }
 
 
 
     render() {
+        const { courses } = this.props;
 
+        if (!courses) {
+            return (
+                <div>Loading...</div>
+            );
+        }
 
         return (
-            <BootstrapTable data={this.props.courses}  selectRow={this.selectRowProp}  options={this.options} bordered={false} striped hover condensed>
-                <TableHeaderColumn dataField="id" isKey hidden>Id</TableHeaderColumn>
+            <div className="container-fluid">
+                <div className="row mt-3">
+                    <div className="col">
+                        <h1>Courses</h1>
+                    </div>
+                </div>
 
-                <TableHeaderColumn
-                    dataField="title"
-                    dataFormat={titleFormatter}
-                    dataSort={true}
-                    caretRender={getCaret}
-                    filter={{type: 'TextFilter', delay: 0 }}
-                    columnTitle
-                >
-                    Title
-                </TableHeaderColumn>
+                <div className="row mt-3">
+                    <div className="col">
+                        <div className="btn-group" role="group">
+                            <button
+                                type="button"
+                                className="btn btn-primary"
+                                onClick={this.handleAddCourse}
+                            >
+                                <i className="fa fa-plus" aria-hidden="true"/> New
+                            </button>
 
-                <TableHeaderColumn
-                    dataField="length"
-                    dataSort={true}
-                    caretRender={getCaret}
-                    columnTitle
-                >
-                    Length
-                </TableHeaderColumn>
+                            <button
+                                type="button"
+                                className="btn btn-warning ml-2"
+                                onClick={this.handleEditCourse}
+                            >
+                                <i className="fa fa-pencil" aria-hidden="true"/> Edit
+                            </button>
 
-                <TableHeaderColumn
-                    dataField="category"
-                    dataSort={true}
-                    caretRender={getCaret}
-                    filter={{type: 'TextFilter', delay: 0 }}
-                    columnTitle
-                >
-                    Category
-                </TableHeaderColumn>
+                            <button
+                                type="button"
+                                className="btn btn-danger ml-2"
+                                onClick={this.handleDelete}
+                            >
+                                <i className="fa fa-trash-o" aria-hidden="true" onClick={this.handleDelete}/> Delete
+                            </button>
+                        </div>
+                    </div>
+                </div>
 
-                <TableHeaderColumn
-                    dataField="authorId"
-                    dataSort={true}
-                    caretRender={getCaret}
-                    filter={{type: 'TextFilter', delay: 0 }}
-                    columnTitle
-                >
-                    Author
-                </TableHeaderColumn>
-            </BootstrapTable>
+                <div className="row">
+                    <div className="col">
+                        <CourseList courses={courses} handleRowSelect={this.handleRowSelect}/>
+                    </div>
+                </div>
+            </div>
         );
     }
-
 }
 
 
 
-CourseList.propTypes = {
-    courses: PropTypes.array.isRequired,
-    handleRowSelect: PropTypes.func.isRequired
+const mapStateToProps = state => ({
+    courses: state.coursesReducer.courses
+});
+
+
+
+const mapDispatchToProps = dispatch => ({
+    action: bindActionCreators(courseAction, dispatch)
+
+});
+
+
+
+CourseListContainer.propTypes = {
+    courses: PropTypes.array,
+    action: PropTypes.object.isRequired,
+    history: PropTypes.object.isRequired
 };
 
 
 
-export default CourseList;
+export default connect(mapStateToProps, mapDispatchToProps)(CourseListContainer);
+
