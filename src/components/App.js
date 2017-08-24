@@ -8,10 +8,7 @@ import About from './About';
 import createBrowserHistory from 'history/createBrowserHistory';
 import HeaderNavContainer from './landing/HeaderNavContainer'; // eslint-disable-line import/no-named-as-default
 
-
-
 const history = createBrowserHistory();
-
 
 const App = () => {
     return (
@@ -36,6 +33,5 @@ const App = () => {
         </div>
     );
 };
-
 
 export default App;

@@ -12,11 +12,7 @@ import 'toastr/build/toastr.min.css';
 import 'font-awesome/css/font-awesome.css';
 import 'react-bootstrap-table/dist/react-bootstrap-table.min.css';
 
-
-
 const store = configureStore();
-
-
 
 render(
     <Provider store={store}>

@@ -9,8 +9,6 @@ import toastr from 'toastr';
 import * as courseAction from '../../action/CourseAction';
 import CourseList from './CourseList';
 
-
-
 export class CourseListContainer extends React.Component {
 
     constructor() {
