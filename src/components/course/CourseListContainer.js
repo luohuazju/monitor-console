@@ -96,7 +96,7 @@ export class CourseListContainer extends React.Component {
                                 className="btn btn-primary"
                                 onClick={this.handleAddCourse}
                             >
-                                <i className="fa fa-plus" aria-hidden="true"/> New
+                                <i className="fa fa-plus" aria-hidden="true"/> 新增
                             </button>
 
                             <button

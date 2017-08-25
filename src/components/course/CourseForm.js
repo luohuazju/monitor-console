@@ -32,7 +32,15 @@ export const CourseForm = ({ handleSubmit, pristine, reset, submitting, heading,
                 type="text"
                 name="category"
                 label="Category"
-                placeholder="Category of the course"
+                placeholder="Category of the course One"
+                component={FieldInput}
+            />
+
+            <Field
+                type="text"
+                name="keyword"
+                label="keyword"
+                placeholder="keyword of the search column"
                 component={FieldInput}
             />
 

@@ -16,7 +16,7 @@ const Footer = () => {
 
             <div className="tab-content py-5">
                 <div className="tab-pane active" id="rest">
-                    <h3>Mock REST</h3>
+                    <h3>Mock REST Async</h3>
                     <p>Custom written mock REST</p>
                 </div>
 
