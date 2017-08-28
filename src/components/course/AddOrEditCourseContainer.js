@@ -82,10 +82,11 @@ export class AddOrEditCourseContainer extends React.Component {
 
 
 const mapStateToProps = (state, ownProps) => {
-    const courseId = ownProps.match.params.id; //from the path '/course/:id'
+    const courseIdT = ownProps.match.params.id; //from the path '/course/:id'
 
-    console.log("courseID = " + courseId);
-    console.log(state.selectedCourseReducer.course);
+    //console.log("courseID = " + courseId);
+    //console.log(state.selectedCourseReducer.course);
+    const courseId = "react-flux-building-applications";
 
     if (courseId && state.selectedCourseReducer.course && courseId === state.selectedCourseReducer.course.id) {
 
