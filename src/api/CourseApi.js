@@ -1,4 +1,7 @@
 import delay from './delay';
+import axios from 'axios';
+
+axios.defaults.baseURL = 'http://localhost:9000';
 
 // This file mocks a web API by working with the hard-coded data below.
 // It uses setTimeout to simulate the delay of an AJAX call.
@@ -57,11 +60,12 @@ const generateId = (course) => {
 
 class CourseApi {
     static getAllCourses() {
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                resolve(Object.assign([], courses));
-            }, delay);
-        });
+        return axios.get('/courses');
+        // return new Promise((resolve) => {
+        //     setTimeout(() => {
+        //         resolve(Object.assign([], courses));
+        //     }, delay);
+        // });
     }
 
     static saveCourse(course) {
