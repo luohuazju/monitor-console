@@ -50,9 +50,6 @@ const courses = [
     }
 ];
 
-function replaceAll(str, find, replace) {
-    return str.replace(new RegExp(find, 'g'), replace);
-}
 
 class CourseApi {
     static getAllCourses() {
@@ -73,13 +70,8 @@ class CourseApi {
     }
 
     static deleteCourse(courseId) {
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                const indexOfCourseToDelete = courses.findIndex(course => course.id === courseId);
-                courses.splice(indexOfCourseToDelete, 1);
-                resolve();
-            }, delay);
-        });
+        const query = "react-flux-building-applications";
+        return axios.delete('/courses/' + query);
     }
 
 

@@ -1,4 +1,12 @@
 - request:
+    url: ^/courses/react-flux-building-applications$
+    method: DELETE
+  response:
+    latency: 1000
+    status: 200
+    body: ""
+
+- request:
     url: ^/courses$
     method: POST
     headers:
