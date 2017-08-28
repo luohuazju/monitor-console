@@ -1,5 +1,24 @@
 - request:
     url: ^/courses/react-flux-building-applications$
+    method: GET
+  response:
+    latency: 1000
+    status: 200
+    headers:
+      content-type: application/json
+    body:
+      {
+        id: "react-flux-building-applications",
+        title: "Building Applications in React and Flux",
+        watchHref: "http://www.pluralsight.com/courses/react-flux-building-applications",
+        authorId: "carl-luo",
+        length: "5:08",
+        category: "JavaScript"
+      }
+
+
+- request:
+    url: ^/courses/react-flux-building-applications$
     method: DELETE
   response:
     latency: 1000
@@ -27,12 +46,12 @@
     status: 200
     body:
       {
-      "id": "react-flux-building-applications",
-      "title": "Building Applications in React and Flux",
-      "watchHref": "http://www.pluralsight.com/courses/react-flux-building-applications",
-      "authorId": "cory-house",
-      "length": "5:08",
-      "category": "JavaScript"
+      id: "react-flux-building-applications",
+      title: "Building Applications in React and Flux",
+      watchHref: "http://www.pluralsight.com/courses/react-flux-building-applications",
+      authorId: "cory-house",
+      length: "5:08",
+      category: "JavaScript"
       }
 
 - request:
@@ -76,13 +95,5 @@
       authorId: "cory-house",
       length: "2:30",
       category: "Career"
-      },
-      {
-      id: "web-components-shadow-dom",
-      title: "Web Component Fundamentals",
-      watchHref: "http://www.pluralsight.com/courses/web-components-shadow-dom",
-      authorId: "cory-house",
-      length: "5:10",
-      category: "HTML5"
       }
       ]

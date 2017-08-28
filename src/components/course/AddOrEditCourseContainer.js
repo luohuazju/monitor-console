@@ -84,7 +84,11 @@ export class AddOrEditCourseContainer extends React.Component {
 const mapStateToProps = (state, ownProps) => {
     const courseId = ownProps.match.params.id; //from the path '/course/:id'
 
+    console.log("courseID = " + courseId);
+    console.log(state.selectedCourseReducer.course);
+
     if (courseId && state.selectedCourseReducer.course && courseId === state.selectedCourseReducer.course.id) {
+
         return {
             initialValues: state.selectedCourseReducer.course,
             authors: authorsFormattedForDropdown(state.authorReducer.authors)
