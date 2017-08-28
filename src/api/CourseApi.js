@@ -61,11 +61,6 @@ const generateId = (course) => {
 class CourseApi {
     static getAllCourses() {
         return axios.get('/courses');
-        // return new Promise((resolve) => {
-        //     setTimeout(() => {
-        //         resolve(Object.assign([], courses));
-        //     }, delay);
-        // });
     }
 
     static saveCourse(course) {

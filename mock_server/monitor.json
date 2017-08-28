@@ -1,5 +1,35 @@
 - request:
     url: ^/courses$
+    method: POST
+    headers:
+      content-type: application/json
+    json:
+      '{
+        "id": "react-flux-building-applications",
+        "title": "Building Applications in React and Flux",
+        "watchHref": "http://www.pluralsight.com/courses/react-flux-building-applications",
+        "authorId": "cory-house",
+        "length": "5:08",
+        "category": "JavaScript"
+      }'
+  response:
+    latency: 1000
+    headers:
+      content-type: application/json
+    status: 200
+    body:
+      {
+      "id": "react-flux-building-applications",
+      "title": "Building Applications in React and Flux",
+      "watchHref": "http://www.pluralsight.com/courses/react-flux-building-applications",
+      "authorId": "cory-house",
+      "length": "5:08",
+      "category": "JavaScript"
+      }
+
+- request:
+    url: ^/courses$
+    method: GET
   response:
     latency: 1000
     headers:
