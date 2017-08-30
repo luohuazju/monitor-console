@@ -32,6 +32,7 @@ const Home = () => {
                             <GoogleLogin
                                 clientId="442664569962-bkfjkg7vvi9fhio0aeoedr4lofe57hjh.apps.googleusercontent.com"
                                 buttonText="Google Login"
+                                className="btn btn-primary"
                                 onSuccess={googleSuccess}
                                 onFailure={googleFailure}
                             />
